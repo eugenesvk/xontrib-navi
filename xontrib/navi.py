@@ -59,6 +59,44 @@ def navi_proc_run(args): # Run a navi process with passed args and return it
 
   return (out, err, retn)
 
+def navi_get_cheat_cmd(event): # Get best match or launch selector
+  buf       	= event.current_buffer
+  doc       	= buf.document
+  pre_cursor	= doc.current_line_before_cursor
+  text      	= doc.text
+
+  current_cmd	= doc.text.strip()
+  if not current_cmd: # no command, launch navi...
+    args = ['--print'] #... to print to stdout
+    choice,err,retn = navi_proc_run(args)
+    event.cli.renderer.erase() # clear old output
+    if   err:
+      print(err, file=sys.stderr)
+    elif choice:
+      buf.text           	=     choice
+      buf.cursor_position	= len(choice)
+  else: # try to match current cmd
+    args = ['--print','--best-match', '--query',current_cmd]
+    best_match,err,retn = navi_proc_run(args)
+    if   err:
+      print(err, file=sys.stderr)
+    elif not best_match: # can't match → do nothing
+      pass
+    elif     best_match and\
+             best_match != current_cmd: # match≠command → use it
+      # todo: fix to replace only current process, not the whole .text
+      buf.text           	=     best_match
+      buf.cursor_position	= len(best_match)
+    else: # match=command → run an interactive process with our command as a query
+      args = ['--print', '--query',current_cmd]
+      out,err,retn = navi_proc_run(args)
+      event.cli.renderer.erase() # clear old output
+      if out: # todo: fix to replace only current process, not the whole .text
+        buf.text           	=     out
+        buf.cursor_position	= len(out)
+
+  return
+
 def _parse_key_user(key_user):
   _key_symb = {
     '⎈':'c-'  ,'⌃':'c-'   ,
