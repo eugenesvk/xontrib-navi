@@ -28,6 +28,9 @@ xontribs = [ "navi", # Initializes navi (interactive cli cheatsheet)
 if 'navi' in xontribs: # Configure navi only if you're actually loading it
   # config var      	  value	 |default|alt_cmd¦ comment
   envx["X_NAVI_KEY"]	= "⎈g" 	#|c-g|   False¦ Autofill existing command with navi's best match or launch navi if no good match found
+  # run to see the allowed list for ↑: from prompt_toolkit.keys import ALL_KEYS; print(ALL_KEYS)
+  # Alt is also supported as either of: a- ⎇ ⌥ (converted to a prefix 'escape')
+  # Control symbols are also supported as either of: ⎈ ⌃
 
 xontribs_load(xontribs) # actually load all xontribs in the list
 ```
