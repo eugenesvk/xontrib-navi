@@ -39,6 +39,18 @@ xontrib load navi # Initializes navi (interactive cli cheatsheet)
 $X_NAVI_KEY	= "c-g" # ...
 ```
 
+## Use
+
+- Autoreplace the command without invoking any manual selection UI with `navi`'s best match:
+  <br/>`git sta` <kbd>⎈</kbd><kbd>g</kbd> `git status`
+    - or hit it again to invoke the manual seletion UI:
+    <br/>`git status` <kbd>⎈</kbd><kbd>g</kbd> navi UI
+    - but failed best match will do nothing:
+    <br/>`git stu` <kbd>⎈</kbd><kbd>g</kbd> `git stu`
+- Split multiple commands and only autofill the one at the ‸cursor position:
+  <br/>`git sta‸; git show` <kbd>⎈</kbd><kbd>g</kbd> `git status‸; git show`
+  <br/>`ls -a‸ | rg 'txt'` <kbd>⎈</kbd><kbd>g</kbd> `ls -alt ‸| rg 'txt'`
+
 
 ## Known issues
 
