@@ -5,15 +5,13 @@ import re
 import sys
 import typing
 import subprocess
-from subprocess                      	import PIPE
-from os                              	import environ, chdir  #
-from pathlib                         	import Path     #
-from xonsh.built_ins                 	import XSH
-from prompt_toolkit.keys             	import ALL_KEYS
-from xonsh.completers.path           	import complete_dir, _quote_paths
-from xonsh.parsers.completion_context	import CompletionContextParser
-from xonsh.lexer                     	import get_tokens
-from bisect                          	import bisect_left, bisect_right
+from subprocess         	import PIPE
+from os                 	import environ
+from pathlib            	import Path
+from xonsh.built_ins    	import XSH
+from prompt_toolkit.keys	import ALL_KEYS
+from xonsh.lexer        	import get_tokens
+from bisect             	import bisect_left, bisect_right
 
 __all__ = ()
 
