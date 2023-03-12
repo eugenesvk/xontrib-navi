@@ -12,6 +12,8 @@ from xonsh.built_ins                 	import XSH
 from prompt_toolkit.keys             	import ALL_KEYS
 from xonsh.completers.path           	import complete_dir, _quote_paths
 from xonsh.parsers.completion_context	import CompletionContextParser
+from xonsh.lexer                     	import get_tokens
+from bisect                          	import bisect_left, bisect_right
 
 __all__ = ()
 
@@ -59,13 +61,58 @@ def navi_proc_run(args): # Run a navi process with passed args and return it
 
   return (out, err, retn)
 
+def get_sep_pos(text):
+  if text.strip():
+    try:
+      tokens = get_tokens(text, tolerant=True) # → LexToken(type, value, lineno, lexpos)
+    except Exception:
+      return
+    sep_pos = list()
+    sep_type = ['SEMI','PIPE','AND','OR']#; | && ||
+    for token in tokens:
+      if (_type := token.type) in sep_type:
+        if (_pos := token.lexpos) not in sep_pos:
+          sep_pos += [_pos]
+    sep_pos.sort()
+    return sep_pos
+  else:
+    return list()
+
+def find_lt_zero(a, x): # Find rightmost value < x or return 0
+  i = bisect_left(a, x)
+  if i:
+    return a[i-1]
+  else:
+    return 0
+def find_ge_last(a, x): # Find leftmost value ≥ x or return last
+  i = bisect_left(a, x)
+  if i != len(a):
+    return a[i]
+  else:
+    return a[-1]
+
+def lead_space_count(txt):
+  return len(txt) - len(txt.lstrip(' '))
+def trail_space_count(txt):
+  return len(txt) - len(txt.rstrip(' '))
+
 def navi_get_cheat_cmd(event): # Get best match or launch selector
   buf       	= event.current_buffer
   doc       	= buf.document
   pre_cursor	= doc.current_line_before_cursor
   text      	= doc.text
+  cursor    	= doc.cursor_position
 
-  current_cmd	= doc.text.strip()
+  # Parse command line into tokens to find commands separated by ; | && ||
+  sep_pos = [-1] + get_sep_pos(text) + [len(text)] # add pre/pos text cursor positions for easier matches
+  current_cmd_beg = find_lt_zero(sep_pos, cursor)
+  current_cmd_end = find_ge_last(sep_pos, cursor)
+  pre_cmd	= text[:current_cmd_beg+1]
+  cmd    	= text[ current_cmd_beg+1:current_cmd_end  ]
+  cmd_sep	= text[ current_cmd_end  :current_cmd_end+1]
+  pos_cmd	= text[                   current_cmd_end+1:]
+
+  current_cmd	= cmd
   if not current_cmd: # no command, launch navi...
     args = ['--print'] #... to print to stdout
     choice,err,retn = navi_proc_run(args)
@@ -76,6 +123,8 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
       buf.text           	=     choice
       buf.cursor_position	= len(choice)
   else: # try to match current cmd
+    lead_sp  = ' ' * lead_space_count (current_cmd)
+    trail_sp = ' ' * trail_space_count(current_cmd)
     args = ['--print','--best-match', '--query',current_cmd]
     best_match,err,retn = navi_proc_run(args)
     if   err:
@@ -84,16 +133,17 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
       pass
     elif     best_match and\
              best_match != current_cmd: # match≠command → use it
-      # todo: fix to replace only current process, not the whole .text
-      buf.text           	=     best_match
-      buf.cursor_position	= len(best_match)
+      buf.text           	=     pre_cmd + lead_sp+best_match+trail_sp + cmd_sep + pos_cmd
+      buf.cursor_position	= len(pre_cmd + lead_sp+best_match+trail_sp)
     else: # match=command → run an interactive process with our command as a query
+      lead_sp  = ' ' * lead_space_count (current_cmd)
+      trail_sp = ' ' * trail_space_count(current_cmd)
       args = ['--print', '--query',current_cmd]
       out,err,retn = navi_proc_run(args)
       event.cli.renderer.erase() # clear old output
-      if out: # todo: fix to replace only current process, not the whole .text
-        buf.text           	=     out
-        buf.cursor_position	= len(out)
+      if out:
+        buf.text           	=     pre_cmd + lead_sp+out+trail_sp + cmd_sep + pos_cmd
+        buf.cursor_position	= len(pre_cmd + lead_sp+out+trail_sp)
 
   return
 
