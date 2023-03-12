@@ -55,7 +55,6 @@ $X_NAVI_KEY	= "c-g" # ...
 ## Known issues
 
 - Bottom toolbar may temporary disappear on some invokations of the commands in this xonrib likely due to this [xonsh issue](https://github.com/xonsh/xonsh/issues/5084)
-- The match currently works only for the whole prompt, so `git sta` will get autofilled to its best navi match of `git status`, but `git show; git sta` will fail to find any match and do nothing
 
 ## Credits
 
