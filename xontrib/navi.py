@@ -130,7 +130,7 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
     elif not best_match: # can't match → do nothing
       pass
     elif     best_match and\
-             best_match != current_cmd: # match≠command → use it
+             best_match != current_cmd.strip(' '): # match≠command → use it
       buf.text           	=     pre_cmd + lead_sp+best_match+trail_sp + cmd_sep + pos_cmd
       buf.cursor_position	= len(pre_cmd + lead_sp+best_match+trail_sp)
     else: # match=command → run an interactive process with our command as a query
