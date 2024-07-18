@@ -22,6 +22,11 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[0.0.4]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.4
+## [0.0.4]
+  - __Fixed__
+    + 🐞 work with changed paths in xonsh v18
+
 [0.0.3]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.3
 ## [0.0.3]
   - __Added__
