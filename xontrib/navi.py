@@ -10,7 +10,7 @@ from os                 	import environ
 from pathlib            	import Path
 from xonsh.built_ins    	import XSH
 from prompt_toolkit.keys	import ALL_KEYS
-from xonsh.lexer        	import get_tokens
+from xonsh.parsers.lexer	import get_tokens
 from bisect             	import bisect_left, bisect_right
 
 __all__ = ()
