@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.3...HEAD
+[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.4...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
