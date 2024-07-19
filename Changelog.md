@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.4...HEAD
+[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.5...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[0.0.5]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.5
+## [0.0.5]
   - __Changed__
     + drop trying to find a binary in a nonexistent cache, which is now very costly, especially with larger `$PATH`s
 
