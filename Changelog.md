@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+  - __Changed__
+    + drop trying to find a binary in a nonexistent cache, which is now very costly, especially with larger `$PATH`s
+
 [0.0.4]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.4
 ## [0.0.4]
   - __Fixed__
