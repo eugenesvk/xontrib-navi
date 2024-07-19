@@ -50,7 +50,7 @@ def get_bin(base_in): # (lazily 1st) get the full path to navi binary from xonsh
 
 def navi_proc_run(args): # Run a navi process with passed args and return it
   if not (bin_ := get_bin(base)):
-    return
+    return (None, f"{base} not found", 1)
 
   full_cmd	= [bin_] + args
   proc    	= subprocess.run(full_cmd, stdout=PIPE)
