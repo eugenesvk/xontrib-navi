@@ -9,6 +9,7 @@ from subprocess         	import PIPE
 from os                 	import environ
 from pathlib            	import Path
 from xonsh.built_ins    	import XSH
+from xonsh.procs        	import executables
 from prompt_toolkit.keys	import ALL_KEYS
 from xonsh.parsers.lexer	import get_tokens
 from bisect             	import bisect_left, bisect_right
@@ -35,6 +36,8 @@ def get_bin(base_in): # (lazily 1st) get the full path to navi binary from xonsh
 
   global is_cmd_cache_fresh
   bin   = XSH.commands_cache.lazy_locate_binary(base, ignore_alias=True)
+  if not bin:
+    bin = executables.locate_executable(base)
   if not bin and not is_cmd_cache_fresh:
     is_cmd_cache_fresh = True
     bin = XSH.commands_cache.     locate_binary(base, ignore_alias=True)
