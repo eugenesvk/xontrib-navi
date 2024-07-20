@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+- 🐞 __Fixed__
+  + error when default keybinding was not set
+
 [0.0.6]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.6
 ## [0.0.6]
 - ✨ __Added__
