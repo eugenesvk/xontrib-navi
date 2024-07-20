@@ -192,6 +192,8 @@ def navi_keybinds(bindings, **_): # Add navi keybinds (when use as an argument i
     if   key_user is None:     # doesn't exist       → use default
       if type(key_def) == list:
         return bindings.add(*key_def)
+      elif key_def is False:
+        return skip
       else:
         return bindings.add( key_def)
     elif key_user is False:    # exists and disabled → don't bind
