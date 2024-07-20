@@ -108,16 +108,16 @@ files = [
 
 [[package]]
 name = "xonsh"
-version = "0.18.1"
+version = "0.18.2"
 description = "Python-powered shell. Full-featured and cross-platform."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "xonsh-0.18.1-py310-none-any.whl", hash = "sha256:43884a1a8e1d9224a72761275ad7ae85b5bdf94de8882c5f8cd9595a1c0ad3c1"},
-    {file = "xonsh-0.18.1-py311-none-any.whl", hash = "sha256:64a52b9846f1758ed6de2a2cc539bded3bcc8c01714358d816c8cf2fd92ba619"},
-    {file = "xonsh-0.18.1-py312-none-any.whl", hash = "sha256:0cd36e9a2d286ce4b71104d364c4552363f895b161a010c4dbdb221fba143809"},
-    {file = "xonsh-0.18.1-py39-none-any.whl", hash = "sha256:702e21c8b6c0666eac1635598ad3e8ed843383fde0a29f09b1be3cfcae3b3d3e"},
-    {file = "xonsh-0.18.1.tar.gz", hash = "sha256:b3063ae7606c7b7177a0135e0850fb1dca6ed234401401aa22dc10529b2d2cb8"},
+    {file = "xonsh-0.18.2-py310-none-any.whl", hash = "sha256:efebe62cfe101b48772b732b456293608abb6008e96b225ff3c32307241b10bb"},
+    {file = "xonsh-0.18.2-py311-none-any.whl", hash = "sha256:ca48d859cdccdf38b6d42277f5aa32ad2e02899fd80e86a67bd81a483f9b676a"},
+    {file = "xonsh-0.18.2-py312-none-any.whl", hash = "sha256:df8010b4af4eeaa7602a0bcd590f2b613337b66d255fcd8478f43046e4e2e6bc"},
+    {file = "xonsh-0.18.2-py39-none-any.whl", hash = "sha256:e666aeed5503178d671a0a3b6347510b640bb7c2b36ef0e1794252947c799351"},
+    {file = "xonsh-0.18.2.tar.gz", hash = "sha256:c5073d154f14c210d855aff4863f69ce9215be084ed5562899bdf1c934f7a53b"},
 ]
 
 [package.dependencies]
@@ -138,4 +138,4 @@ test = ["coverage (>=5.3.1)", "prompt-toolkit (>=3.0.29)", "pygments (>=2.2)", "
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0"
-content-hash = "f75acd95c3c2d9f5acc5d2c9c2f786e8fb18c836837972f8e01e8c4fd3fe6327"
+content-hash = "198b499d0670e2104c855a2ce1f88c38e3d9d80fd6bdd5494920093ab884ec5a"
