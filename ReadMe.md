@@ -26,9 +26,9 @@ xontribs = [ "navi", # Initializes navi (interactive cli cheatsheet)
  # your other xontribs
 ] # ↓ optional configuration variables (use `False` to disable a keybind)
 if 'navi' in xontribs: # Configure navi only if you're actually loading it
-  # config var           	  value	 |default|alt_cmd¦ comment
-  envx["X_NAVI_KEY"]     	= "⎈g" 	#|c-g|   False¦ Autofill existing command with navi's best match or launch navi if no good match found
-  envx["x_navi_key_skim"]	= "⎇g" 	#False          Autofill existing command with navi's best match or launch navi if no good match found (skim)
+  #Config var             Value   ≝Default¦alt_cmd comment
+  envx["X_NAVI_KEY"     ] = "⎈g"  #≝c-g ¦False  Autofill existing command with navi's best match or launch navi if no good match found
+  envx["x_navi_key_skim"] = "⎇g" #≝False       Autofill existing command with navi's best match or launch navi if no good match found (skim)
   # run to see the allowed list for ↑: from prompt_toolkit.keys import ALL_KEYS; print(ALL_KEYS)
   # Alt is also supported as either of: a- ⎇ ⌥ (converted to a prefix 'escape')
   # Control symbols are also supported as either of: ⎈ ⌃
@@ -40,8 +40,8 @@ xontribs_load(xontribs) # actually load all xontribs in the list
 ```xsh
 xontrib load navi # Initializes navi (interactive cli cheatsheet)
 # configure like in the example above, but replace envx['VAR'] with $VAR
-$X_NAVI_KEY     	= "c-g" # ...
-$x_navi_key_skim	= ["escape","g"] # ...
+$X_NAVI_KEY      = "c-g" # ...
+$x_navi_key_skim = ["escape","g"] # ...
 ```
 
 ## Use
