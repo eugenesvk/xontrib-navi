@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.5...HEAD
+[unreleased]: https://github.com/eugenesvk/xontrib-navi/compare/0.0.6...HEAD
 ## [Unreleased]
 <!-- - ✨ __Added__ -->
   <!-- + new features -->
@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+[0.0.6]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.6
+## [0.0.6]
 - ✨ __Added__
   + a `x_navi_key_skim` keybind to use 'skim' as a finder
 - 🐞 __Fixed__
