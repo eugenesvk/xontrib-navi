@@ -100,7 +100,7 @@ def lead_space_count(txt):
 def trail_space_count(txt):
   return len(txt) - len(txt.rstrip(' '))
 
-def navi_get_cheat_cmd(event): # Get best match or launch selector
+def navi_get_cheat_cmd(event,finder="fzf"): # Get best match or launch selector
   buf       	= event.current_buffer
   doc       	= buf.document
   pre_cursor	= doc.current_line_before_cursor
@@ -116,9 +116,12 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
   cmd_sep	= text[ current_cmd_end  :current_cmd_end+1]
   pos_cmd	= text[                   current_cmd_end+1:]
 
+  args_pre = []
+  if finder == "skim": # use skim instead of fzf
+    args_pre = ['--finder','skim']
   current_cmd	= cmd
   if not current_cmd: # no command, launch navi...
-    args = ['--print'] #... to print to stdout
+    args = args_pre + ['--print'] #... to print to stdout
     choice,err,retn = navi_proc_run(args)
     event.cli.renderer.erase() # clear old output
     if   err:
@@ -129,7 +132,7 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
   else: # try to match current cmd
     lead_sp  = ' ' * lead_space_count (current_cmd)
     trail_sp = ' ' * trail_space_count(current_cmd)
-    args = ['--print','--best-match', '--query',current_cmd]
+    args = args_pre + ['--print','--best-match', '--query',current_cmd]
     best_match,err,retn = navi_proc_run(args)
     if   err:
       print(err, file=sys.stderr)
@@ -142,7 +145,7 @@ def navi_get_cheat_cmd(event): # Get best match or launch selector
     else: # match=command → run an interactive process with our command as a query
       lead_sp  = ' ' * lead_space_count (current_cmd)
       trail_sp = ' ' * trail_space_count(current_cmd)
-      args = ['--print', '--query',current_cmd]
+      args = args_pre + ['--print', '--query',current_cmd]
       out,err,retn = navi_proc_run(args)
       event.cli.renderer.erase() # clear old output
       if out:
@@ -176,7 +179,8 @@ def navi_keybinds(bindings, **_): # Add navi keybinds (when use as an argument i
   from prompt_toolkit.key_binding.key_bindings import _parse_key
 
   _default_keys = {
-    "X_NAVI_KEY"	: "c-g",
+    "X_NAVI_KEY"     	: "c-g",
+    "x_navi_key_skim"	: False,
     }
 
   def handler(key_user_var):
@@ -214,6 +218,9 @@ def navi_keybinds(bindings, **_): # Add navi keybinds (when use as an argument i
   @handler("X_NAVI_KEY")
   def navi_cheat_cmd(event): # Match current command to the best cheat sheet or launch the selector
     navi_get_cheat_cmd(event)
+  @handler("x_navi_key_skim")
+  def navi_cheat_cmd(event): # Match current command to the best cheat sheet or launch the selector
+    navi_get_cheat_cmd(event,'skim')
 
 
 def _activate_navi():
