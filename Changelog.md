@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+- ✨ __Added__
+  + a `x_navi_key_skim` keybind to use 'skim' as a finder
+- 🐞 __Fixed__
+  + keybind sequences causing an error due to the parser trying to despace a list improperly
+
 [0.0.5]: https://github.com/eugenesvk/xontrib-navi/releases/tag/0.0.5
 ## [0.0.5]
   - __Changed__
